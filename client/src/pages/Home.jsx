@@ -45,7 +45,7 @@ function Home({ search }) {
       console.log(url);
 
       const res = await api.get(url);
-
+      console.log("API RESPONSE:", res.data);
       setProducts(res.data);
 
     } catch (err) {

@@ -12,6 +12,36 @@ function AddProduct() {
   const [stock, setStock] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState(null);
+ const generateDescription = async () => {
+  try {
+    console.log("Button Clicked");
+
+    const res = await api.post("/ai/chat", {
+      message: `
+Generate a professional e-commerce product description.
+
+Product Name: ${name}
+Category: ${category}
+Price: ₹${price}
+
+Keep it within 80-100 words.
+      `,
+    });
+
+    console.log("AI Response:", res.data);
+
+    setDescription(res.data.reply);
+
+    toast.success("AI Description Generated!");
+  } catch (err) {
+    console.log("FULL ERROR:", err);
+    console.log("ERROR RESPONSE:", err.response?.data);
+
+    toast.error(
+      err.response?.data?.message || "Failed to generate description"
+    );
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,7 +107,13 @@ function AddProduct() {
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-
+        <button
+  type="button"
+  onClick={generateDescription}
+  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+>
+  🤖 Generate AI Description
+</button>
         <input
           type="number"
           placeholder="Price"

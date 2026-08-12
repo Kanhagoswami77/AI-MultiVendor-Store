@@ -6,7 +6,6 @@ function ProductCard({ product }) {
   const addToCart = async () => {
     try {
       const token = localStorage.getItem("token");
-
       const res = await api.post(
         "/cart/add",
         {
