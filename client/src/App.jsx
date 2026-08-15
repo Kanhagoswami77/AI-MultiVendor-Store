@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import ShoppingChatbot from "./components/ShoppingChatbot";
 function App() {
 
   const [search, setSearch] = useState("");
@@ -102,9 +102,13 @@ function App() {
 
       </Routes>
 
-      <Footer />
+           <Footer />
+
+      <ShoppingChatbot />
 
     </>
+
+    
   );
 }
 
